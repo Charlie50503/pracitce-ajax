@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var xhr = new XMLHttpRequest();
+			console.log(xhr)
+			//readyState 
+			//0 - 你已經產生出一個XMLHttpRequest,但是還沒有連接你要撈的資料
+			//1 - 你用了open()但你還有沒把資料傳送
+			//2 - 偵測到你用了send
+			//3 - loading 可能資料太大了還在讀取
+			//4 - 你已經撈到資料了，數據已經完全接收到了
+			//格式、要讀取的網址、同步非同步
+			//格式 : get (讀取資料)、post(傳送資料到伺服器)
+			xhr.open('get','https://hexschool.github.io/ajaxHomework/data.json',false)
+			//true 非同步，不會有資料傳回來，就讓程式繼續往下跑，等到回傳才會自動回傳
+			//false 它回等到資料回傳回來，才會讓程式碼繼續往下跑
+			//只取資料但沒有傳送資料就要用,null
+			xhr.send(null);
+			//這裡想要直接打印結果是印不出來的，因為response還沒有回傳就先打印了
+			
+			console.log(xhr.responseText)
+			//response: "[{"name":"王小名"}]↵"
+			// responseText: "[{"name":"王小名"}]↵"
+			
+			
+		</script>
+	</body>
+</html>

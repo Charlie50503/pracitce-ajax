@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div>
+			<h2>註冊</h2>
+			帳號:
+			<input type="text" name="account" id="register_account">
+			<br>
+			密碼:
+			<input type="text" name="password" id="register_password">
+			<br>
+			<button onclick="Register()">註冊</button>
+			<div class="register-result"></div>
+		</div>
+		
+		<div>
+			<h2>登錄</h2>
+			帳號:
+			<input type="text" name="account" id="login-account">
+			<br>
+			密碼:
+			<input type="text" name="password" id="login-password">
+			<br>
+			<button onclick="Login()">登錄</button>
+			<div class="login-result"></div>
+		</div>
+		<!-- <input type="submit" name="" id="" value="送出"/> -->
+		<!-- <form action="" id="myForm" onsubmit="myClick()">
+			
+		</form> -->
+		<!-- 後面接參數，?,連接多個內容時會用& -->
+		<!-- http://127.0.0.1:8848/testJavascriptXML/index3.html?account=123&password=password -->
+		<script type="text/javascript">
+			var basic_url='https://hexschool-tutorial.herokuapp.com/api/';
+			var contentType = 'application/json'
+			function Register(){
+				console.log('click!');
+				// let myForm = document.getElementById('myForm')
+				// var formData = new FormData(myForm);
+				// console.log(formData)
+				let account = document.querySelector('#register_account')
+				let password = document.querySelector('#register_password')
+				console.log(account.value)
+				console.log(password.value)
+				var xhr = new XMLHttpRequest()
+				xhr.open('post',basic_url+'signup',true)
+				//傳送的網頁格式
+				//常見格式
+				xhr.setRequestHeader("Content-type",contentType)
+				var data = {
+					email:account.value,
+					password:password.value
+				}
+				xhr.send(JSON.stringify(data))
+				console.log(xhr)
+				xhr.onload = () => {
+					if(xhr.status===200 && xhr.readyState===4) {
+						console.log(xhr.responseText)
+						var str = JSON.parse(xhr.responseText)
+						console.log(str)
+						document.querySelector('.register-result').textContent=str.message
+					}
+					
+				}
+			}
+			
+			function Login(){
+				console.log('click!');
+				// let myForm = document.getElementById('myForm')
+				// var formData = new FormData(myForm);
+				// console.log(formData)
+				let account = document.querySelector('#login-account')
+				let password = document.querySelector('#login-password')
+				console.log(account.value)
+				console.log(password.value)
+				var xhr = new XMLHttpRequest()
+				xhr.open('post',basic_url+'signin',true)
+				//傳送的網頁格式
+				//常見格式
+				xhr.setRequestHeader("Content-type",contentType)
+				var data = {
+					email:account.value,
+					password:password.value
+				}
+				var jsonData = JSON.stringify(data)
+				console.log(jsonData);
+				xhr.send(jsonData)
+				console.log(xhr)
+				xhr.onload = () => {
+					if(xhr.status===200 && xhr.readyState===4) {
+						console.log(xhr.responseText)
+						var str = JSON.parse(xhr.responseText)
+						console.log(str)
+						document.querySelector('.login-result').textContent=str.message
+					}
+					
+				}
+			}
+		</script>
+	</body>
+</html>

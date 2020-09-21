@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div class="text">
+			
+		</div>
+		<script type="text/javascript">
+			var xhr = new XMLHttpRequest();
+			console.log(xhr)
+			xhr.open('get','https://hexschool.github.io/ajaxHomework/data.json',true)
+			xhr.send(null);
+			//onload 全部讀取完後才執行，有收到response才會去執行
+			xhr.onload = () => {
+				console.log(xhr.responseText)
+				var str = JSON.parse(xhr.responseText)
+				console.log(str)
+				document.querySelector('.text').textContent = str[0].name
+			}
+			//1.建立XMLHttpRequest
+			//2.傳送到對方伺服器要資料
+			//3.回傳資料到自己的瀏覽器
+			//4.拿到資料後在看要怎麼處理
+		</script>
+	</body>
+</html>
